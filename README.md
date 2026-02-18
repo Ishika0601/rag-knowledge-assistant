@@ -34,7 +34,7 @@ This project addresses that issue by:
 ```mermaid
 flowchart LR
     U[User Query] --> A[FastAPI /ask Endpoint]
-    A --> R[Vector Retriever (FAISS)]
+    A --> R["Vector Retriever (FAISS)"]
     R --> C[Top-K Context Chunks]
     C --> P[Prompt-Engineered RAG Chain]
     P --> L[LLM]
