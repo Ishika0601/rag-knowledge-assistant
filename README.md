@@ -90,8 +90,17 @@ sequenceDiagram
 ### Retrieval Accuracy — hit@k
 Measures whether retrieved chunks contain expected query terms.
 
+hit@k = (# relevant terms found in retrieved docs) / (total expected terms)
+
+This helps quantify how effectively the retriever supplies useful context.
+
 ### Answer Faithfulness
 Ensures generated responses are fully grounded in retrieved context.
+
+- If answer content is missing from the context → flagged as unfaithful
+- If insufficient context exists → system returns "I don't know"
+- 
+This mechanism explicitly reduces hallucinations.
 
 ### System Metrics
 - End-to-end latency
@@ -110,6 +119,9 @@ Ensures generated responses are fully grounded in retrieved context.
 | 5 | 0.82 | 90% | 1.18s |
 | 7 | 0.85 | 91% | 1.42s |
 
+Chosen value: k = 5
+Balances retrieval accuracy and response latency.
+
 ### Chunk Size
 
 | Size | hit@k | Faithful |
@@ -117,6 +129,54 @@ Ensures generated responses are fully grounded in retrieved context.
 | 300 | 0.71 | 88% |
 | 500 | 0.82 | 90% |
 | 800 | 0.79 | 89% |
+
+Chosen value: chunk_size = 500
+
+---
+
+## 🔌 API Endpoint
+
+### Ask a Question
+
+```
+GET /ask?question=<your_question>
+```
+
+**Example:**
+```
+GET /ask?question=What is retrieval augmented generation?
+```
+
+Swagger UI:
+```
+http://localhost:8000/docs
+```
+
+---
+
+## 🧾 Sample API Responses
+
+### ✅ Grounded Answer
+
+```json
+{
+  "answer": "Retrieval augmented generation combines document retrieval with language generation to improve factual accuracy.",
+  "retrieval_hit_at_k": 0.83,
+  "faithful": true,
+  "latency_seconds": 1.18
+}
+```
+
+### ❌ Hallucination Prevention
+
+```json
+{
+  "answer": "I don't know",
+  "retrieval_hit_at_k": 0.12,
+  "faithful": true,
+  "latency_seconds": 0.98
+}
+```
 
 ---
 
