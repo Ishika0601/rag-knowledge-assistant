@@ -1,0 +1,27 @@
+Retrieval Augmented Generation (RAG) is a technique that combines information retrieval with language generation.
+In a RAG system, relevant documents are retrieved from a knowledge base and provided as context to a language model.
+This approach helps reduce hallucinations and improves factual accuracy in generated responses.
+
+Vector databases store embeddings of text documents and enable semantic similarity search.
+Embeddings convert text into numerical vectors that capture semantic meaning.
+Common similarity metrics include cosine similarity and dot product.
+
+Prompt grounding is a critical component of RAG systems.
+The prompt explicitly instructs the language model to answer only using the retrieved context.
+If the required information is missing from the context, the model should respond with "I don't know".
+
+Chunking strategies significantly impact retrieval performance.
+Smaller chunks improve precision but may lose context.
+Larger chunks preserve context but may introduce noise.
+Overlapping chunks help balance precision and recall.
+
+Evaluation is essential for production-ready RAG systems.
+Retrieval accuracy can be measured using metrics such as hit@k and recall@k.
+Answer quality should be evaluated for faithfulness, completeness, and hallucination risk.
+
+Latency is an important system metric.
+RAG systems must balance retrieval depth and response time.
+Higher values of k improve retrieval accuracy but increase latency.
+
+Production-grade RAG systems include logging, monitoring, and evaluation pipelines.
+They are often deployed using APIs and containerized for scalability.
