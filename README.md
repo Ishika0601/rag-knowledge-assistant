@@ -89,9 +89,9 @@ sequenceDiagram
 
 ### Retrieval Accuracy — hit@k
 Measures whether retrieved chunks contain expected query terms.
-
+```
 hit@k = (# relevant terms found in retrieved docs) / (total expected terms)
-
+```
 This helps quantify how effectively the retriever supplies useful context.
 
 ### Answer Faithfulness
@@ -99,7 +99,7 @@ Ensures generated responses are fully grounded in retrieved context.
 
 - If answer content is missing from the context → flagged as unfaithful
 - If insufficient context exists → system returns "I don't know"
-- 
+
 This mechanism explicitly reduces hallucinations.
 
 ### System Metrics
